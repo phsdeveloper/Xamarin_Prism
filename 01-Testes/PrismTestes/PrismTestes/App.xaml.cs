@@ -2,6 +2,7 @@
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace PrismTestes
@@ -20,7 +21,8 @@ namespace PrismTestes
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<Views.MainPage>();
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<Views.MainPage,ViewModels.MainPageViewModel>();
         }
 
         protected override void OnStart()

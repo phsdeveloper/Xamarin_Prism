@@ -1,24 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PrismTestes.Views.MainPage">
+             x:Class="PrismTestes.Views.MainPage"
+             Title="{Binding Title}"   
+             xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+                  >
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu" BackgroundColor="#2d2d2d">
+            <ContentPage.Content>
+                <ScrollView>
+                    <StackLayout BindableLayout.ItemsSource="{Binding PRP_ItensMenu}" BackgroundColor="{Binding PRP_BackGroundColor}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="{Binding PRP_BackGroundColor}" BorderColor="{Binding PRP_BorderColor}" Margin="10,10,10,0"> 
+                                    <StackLayout>
+                                        <Label Text="{Binding PRP_Display}"   TextColor="{Binding PRP_FontColor}" />
+                                        <Label Text="{Binding PRP_Descricao}" TextColor="{Binding PRP_FontColor}"/>
+                                    </StackLayout>
+                                    
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </ScrollView>
+            </ContentPage.Content>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <ContentPage>
+                    <StackLayout>
+                        <Label Text="{Binding Title}"/>
+                    </StackLayout>
+                </ContentPage>
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
 
-</ContentPage>
+</MasterDetailPage>
