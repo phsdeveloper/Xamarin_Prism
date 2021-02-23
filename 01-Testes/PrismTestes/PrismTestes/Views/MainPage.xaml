@@ -4,27 +4,40 @@
              x:Class="PrismTestes.Views.MainPage"
              Title="{Binding Title}"   
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:bh="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
                   >
 
     <MasterDetailPage.Master>
         <ContentPage Title="Menu" BackgroundColor="#2d2d2d">
             <ContentPage.Content>
-                <ScrollView>
-                    <StackLayout BindableLayout.ItemsSource="{Binding PRP_ItensMenu}" BackgroundColor="{Binding PRP_BackGroundColor}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <Frame BackgroundColor="{Binding PRP_BackGroundColor}" BorderColor="{Binding PRP_BorderColor}" Margin="10,10,10,0"> 
-                                    <StackLayout>
-                                        <Label Text="{Binding PRP_Display}"   TextColor="{Binding PRP_FontColor}" />
-                                        <Label Text="{Binding PRP_Descricao}" TextColor="{Binding PRP_FontColor}"/>
+                <ListView ItemsSource="{Binding PRP_ItensMenu}" BackgroundColor="#2d2d2d" HasUnevenRows="True" >
+                    <ListView.Behaviors>
+                        <bh:EventToCommandBehavior EventName="ItemTapped"
+                                                   Command="{Binding SelecionarMenuItemCommand}" 
+                                                   EventArgsParameterPath="Item"
+                                                   
+                            />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout BackgroundColor="#2d2d2d">
+                                        <Frame BackgroundColor="{Binding PRP_BackGroundColor}" BorderColor="{Binding PRP_BorderColor}" Margin="10,10" CornerRadius="10">
+                                            <StackLayout>
+                                                <Label Text="{Binding PRP_Display}"   TextColor="{Binding PRP_FontColor}" />
+                                                <Label Text="{Binding PRP_Descricao}" TextColor="{Binding PRP_FontColor}"/>
+                                            </StackLayout>
+
+                                        </Frame>
                                     </StackLayout>
                                     
-                                </Frame>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </StackLayout>
-                </ScrollView>
+                                </ViewCell.View>
+                            </ViewCell>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </ContentPage.Content>
         </ContentPage>
     </MasterDetailPage.Master>

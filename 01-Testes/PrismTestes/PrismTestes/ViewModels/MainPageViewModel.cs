@@ -20,12 +20,22 @@ namespace PrismTestes.ViewModels
         public ObservableCollection<Model.MainPage_MenuItem> PRP_ItensMenu { get; set; }
         #endregion A T R I B U T O S
 
-        DelegateCommand<Model.MainPage_MenuItem> SelecionarMenuItemCommand { get; set; }
+        public DelegateCommand<Model.MainPage_MenuItem> SelecionarMenuItemCommand { get; set; }
 
 
-        private void MTD_RedirecionarPagina(Model.MainPage_MenuItem ItemMenu)
+        private void MTD_RedirecionarPagina(Model.MainPage_MenuItem pMenuItem)
         {
-            var dados = ItemMenu;
+            foreach (var item in PRP_ItensMenu)
+            {
+                item.PRP_Descricao.Replace("Chamou", "");
+                item.PRP_BackGroundColor = item.PRP_CoresMenu.PRP_UnSelectedBackGroundColor;
+                item.PRP_FontColor = item.PRP_CoresMenu.PRP_UnSelectedFontColor;
+            }
+            var dados = pMenuItem;
+            pMenuItem.PRP_BackGroundColor = pMenuItem.PRP_CoresMenu.PRP_SelectedBackGroundColor;
+            pMenuItem.PRP_FontColor = pMenuItem.PRP_CoresMenu.PRP_SelectedFontColor;
+            pMenuItem.PRP_Descricao += "Chamou";
+
         }
     }
 }
